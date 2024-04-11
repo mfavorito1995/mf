@@ -1,0 +1,9 @@
+{% if blogs_date_desc %}
+    <ul>
+    {% for b in blogs_date_desc %}
+        <li><a href="/blog/{{b.id}}/">{{b.title}}</a></li>
+    {% endfor %}
+    </ul
+{% else %}
+    <p>Write something, will ya?!</p>
+{% endif %}
