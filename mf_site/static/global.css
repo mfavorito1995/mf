@@ -1,0 +1,13 @@
+html {
+    line-height: 1.5;
+}
+
+body {
+    margin: 0;
+    line-height: inherit;
+}
+
+.w-full {
+    width: 100%
+}
+
