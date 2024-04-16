@@ -14,15 +14,23 @@
     {% compress css %}
         <link rel="stylesheet" href="{% static 'src/output.css' %}">
     {% endcompress %}
+    <link rel="stylesheet" href="{% static 'global.css' %}">
 
 </head>
 
-<body class="bg-green-50">
-    <div class="container mx-auto mt-4">
-        {% block content %}
-        {% endblock content %}
+<body class="h-screen bg-green-50">
+    <div class="flex flex-col h-full mx-4">
+        <div class=" mt-4 main-content overflow-y-auto flex-grow">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <footer class="flex-shrink-0 h-10vh content-center">
+            <ul class="flex gap-5 md:mb-3 md:gap-8">
+                <li>About</li>
+                <li><a href="/blog/">Blogs</a></li>
+                <li><a href="/contact/contact/">Contact</li>
+                <li>GitHub</li>
+            </ul>
+        </footer>
     </div>
 </body>
-
-
-</html>
