@@ -654,6 +654,10 @@ html {
   height: 100vh;
 }
 
+.h-90vh {
+  height: 90vh;
+}
+
 .w-10vw {
   width: 10vw;
 }

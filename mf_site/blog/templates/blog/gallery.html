@@ -2,12 +2,41 @@
 
 
 {% block content %}
-    <div class="overflow-y-auto">
-        <div class="mb-4">
+    <div>
+        <div class="mb-4" style="max-height: 10vh">
             <h1>Blog Gallery</h1>
         </div>
     {% if blogs_date_desc %}
-        <div class="flex flex-wrap w-full">
+        <div class="overflow-y-auto" style="max-height: 80vh;">
+            {% for b in blogs_date_desc %}
+                {% if forloop.counter0 == 0 %}
+                    <div class="flex flex-wrap" style="justify-content: space-between;">
+                {% elif forloop.counter0|divisibleby:n_row_cards %}
+                    </div><div class="flex flex-wrap" style="justify-content: space-between;">
+                {% endif %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a href="{% url 'blog:a_blog' b.id %}">{{ b.title }}</li>
+                            <li><a href="/blog/{{ b.id }}/">{{ b.title }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if extra_cards_list %}
+                {% for card in extra_cards_list %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a></li>
+                            <li><a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            {% endif %}
+
             {% for b in blogs_date_desc %}
                 {% if forloop.counter0|divisibleby:n_row_cards %}
                     </div><div class="flex flex-wrap" style="justify-content: space-between;">
@@ -34,6 +63,143 @@
                 {% endfor %}
                 
             {% endif %}
+
+            {% for b in blogs_date_desc %}
+                {% if forloop.counter0|divisibleby:n_row_cards %}
+                    </div><div class="flex flex-wrap" style="justify-content: space-between;">
+                {% endif %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a href="{% url 'blog:a_blog' b.id %}">{{ b.title }}</li>
+                            <li><a href="/blog/{{ b.id }}/">{{ b.title }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if extra_cards_list %}
+                {% for card in extra_cards_list %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a></li>
+                            <li><a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            {% endif %}
+
+            {% for b in blogs_date_desc %}
+                {% if forloop.counter0|divisibleby:n_row_cards %}
+                    </div><div class="flex flex-wrap" style="justify-content: space-between;">
+                {% endif %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a href="{% url 'blog:a_blog' b.id %}">{{ b.title }}</li>
+                            <li><a href="/blog/{{ b.id }}/">{{ b.title }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if extra_cards_list %}
+                {% for card in extra_cards_list %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a></li>
+                            <li><a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            {% endif %}
+
+            {% for b in blogs_date_desc %}
+                {% if forloop.counter0|divisibleby:n_row_cards %}
+                    </div><div class="flex flex-wrap" style="justify-content: space-between;">
+                {% endif %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a href="{% url 'blog:a_blog' b.id %}">{{ b.title }}</li>
+                            <li><a href="/blog/{{ b.id }}/">{{ b.title }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if extra_cards_list %}
+                {% for card in extra_cards_list %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a></li>
+                            <li><a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            {% endif %}
+
+            {% for b in blogs_date_desc %}
+                {% if forloop.counter0|divisibleby:n_row_cards %}
+                    </div><div class="flex flex-wrap" style="justify-content: space-between;">
+                {% endif %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a href="{% url 'blog:a_blog' b.id %}">{{ b.title }}</li>
+                            <li><a href="/blog/{{ b.id }}/">{{ b.title }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if extra_cards_list %}
+                {% for card in extra_cards_list %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a></li>
+                            <li><a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            {% endif %}
+
+            {% for b in blogs_date_desc %}
+                {% if forloop.counter0|divisibleby:n_row_cards %}
+                    </div><div class="flex flex-wrap" style="justify-content: space-between;">
+                {% endif %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a href="{% url 'blog:a_blog' b.id %}">{{ b.title }}</li>
+                            <li><a href="/blog/{{ b.id }}/">{{ b.title }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if extra_cards_list %}
+                {% for card in extra_cards_list %}
+                <div class="mb-4" style="width: calc(100% / {{ n_row_cards }});">
+                    <div class="card">
+                        <ul>
+                            <li><a></li>
+                            <li><a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            {% endif %}
+
+        </div>
         </div>
     {% else %}
         <p>Write something, will ya?!</p>
