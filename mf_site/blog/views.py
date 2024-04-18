@@ -4,14 +4,22 @@ from django.http import HttpResponse, Http404
 from .models import Blog
 
 def index(request):
-    return HttpResponse("Blog app")
-
-def gallery(request):
     blogs_date_desc = Blog.objects.order_by("publish_date")
 
+    # Calculate the number of extra cards needed to fill the last row
+    n_row_cards = 4  # You can adjust this value as needed
+    
+    extra_cards_needed = n_row_cards - (len(blogs_date_desc) % n_row_cards)
+    if extra_cards_needed:
+        extra_cards_list = range(extra_cards_needed)
+    else: extra_cards_list = None
+    
     # Set the data in the context
     context = {
-        "blogs_date_desc": blogs_date_desc
+        "blogs_date_desc": blogs_date_desc,
+        "extra_cards_list": extra_cards_list,
+        "n_row_cards": n_row_cards,
+        "card_width": f"1/{n_row_cards}"
     }
 
     return render(request, "blog/gallery.html", context)

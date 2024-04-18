@@ -20,9 +20,21 @@
 
 <body class="h-screen bg-green-50">
     <div class="flex flex-col h-full mx-4">
-        <div class=" mt-4 main-content overflow-y-auto flex-grow">
-            {% block content %}
-            {% endblock content %}
+        <div class=" mt-4 main-content flex-grow">
+            <div id="sidebar" class="flex flex-row">
+                <div class = "flex-shrink-0 w-10vw">
+                    <h2>
+                        M<br>
+                        F
+                    </h2>
+                </div>
+                <div class="flex-grow">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+                <div class= "flex-shrink-0 w-10vw">
+                </div>
+            </div>
         </div>
         <footer class="flex-shrink-0 h-10vh content-center">
             <ul class="flex gap-5 md:mb-3 md:gap-8 justify-center">

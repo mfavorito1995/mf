@@ -12,3 +12,6 @@ body {
     width: 100%
 }
 
+.card-wrapper {
+    width: calc(100% / var(--n-row-cards));
+}

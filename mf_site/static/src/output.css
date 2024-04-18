@@ -654,6 +654,10 @@ html {
   height: 100vh;
 }
 
+.w-10vw {
+  width: 10vw;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -662,12 +666,20 @@ html {
   flex-grow: 1;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-col {
   flex-direction: column;
 }
 
 .content-center {
   align-content: center;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .gap-5 {
@@ -686,10 +698,6 @@ html {
 .text-9xl {
   font-size: 8rem;
   line-height: 1;
-}
-
-.italic {
-  font-style: italic;
 }
 
 .leading-loose {
