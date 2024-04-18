@@ -1,0 +1,185 @@
+{% extends "_base_side.html" %}
+
+<style>
+
+.res-cont {
+    margin-top: 1rem;
+    margin-bottom: 3rem; 
+}
+
+</style>
+
+
+{% block statictop %}
+    <div class="mb-4">
+        <h1>About Me</h1>
+    </div>
+    <ul class="flex gap-5 md:mb-3 md:gap-8">
+            <li><a href="#my-summary">Summary</a></li>
+            <li><a href="#my-skills">Skills</a></li>
+            <li><a href="#my-experience">Experience</a></li>
+            <li><a href="#my-education">Education</a></li>
+    </ul>
+{% endblock statictop %}
+{% block content %}
+    <div class="container mt-4 mb-8" id="my-summary">
+        <div class="mb-4">
+            <p class="mb-4">Hello there - I am an experienced Data Scientist that blends GIS expertise with skills in Python, SQL, and Machine Learning.
+            Passionate about solving complex problems and translating data into actionable insights, I excel at bridging the gap between technical and business worlds.
+            With a proven track record of success, I would be able to help you leverage cutting-edge technology for a positive impact on your business or organization.
+            Currently based in Santa Monica, CA I am open to new remote in-person opportunities.</p>
+            <p class="mb-4">Outside of work, I like to spend my time exploring all that Southern California has to offer on foot, bike, or board. Check out my <strong><a href="/blog/gallery">blogs</a></strong> to learn more about what I get up to after hours.</p>
+        </div>
+    </div>
+    <div class="container mt-4 mb-8" id="my-skills">
+        <div class="mb-4">
+            <h2><strong>Skills</strong></h2>
+        </div>
+        <div class="mb-4">
+            <div class="flex flex-col">
+                <h4><strong>Technical</strong></h4>
+                <div class="flex flex-row flex-grow">
+                    <div class="flex flex-col" style="width: 20%">
+                        <h4>Python</h4>
+                        <li>Pandas</li>
+                        <li>NumPy</li>
+                        <li>Scikit-Learn</li>
+                        <li>PyTorch</li>
+                        <li>Django (this website)</li>
+                        <li>Flask</li>
+                    </div>
+                    <div class="flex flex-col" style="width: 20%">
+                        <h4>Databases/Tools</h4>
+                        <li>Snowflake</li>
+                        <li>Azure</li>
+                        <li>SQLite</li>
+                        <li>MongoDB</li>
+                        <li>Looker</li>
+                        <li>AWS (S3, EC2, Lambda)</li>
+                    </div>
+                    <div class="flex flex-col" style="width: 20%">
+                        <h4>Geospatial</h4>
+                        <li>ArcGIS</li>
+                        <li>QGIS</li>
+                        <li>MapBox</li>
+                        <li>Spatial Analytics</li>
+                        <li>Geoprocessing Tools</li>
+                    </div>
+                    <div class="flex flex-col" style="width: 20%">
+                        <h4>Data Science</h4>
+                        <li>Basic JavaScript</li>
+                        <li>ETL Design/Dev</li>
+                        <li>Data Wrangling</li>
+                        <li>Webscraping</li>
+                        <li>Streamlit</li>
+                        <li>CI/CD</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-4">
+            <div class="flex flex-col">
+                <h4><strong>Interpersonal</strong></h4>
+                <div class="flex flex-row flex-grow">
+                    <div class="flex flex-col" style="width: 20%">
+                        <h4>Communcation</h4>
+                        <li>Skill 1</li>
+                        <li>Skill 2</li>
+                        <li>Skill 3</li>
+                        <li>Skill 4</li>
+                    </div>
+                    <div class="flex flex-col" style="width: 20%">
+                        <h4>Project Management</h4>
+                        <li>Trello</li>
+                        <li>Asana</li>
+                        <li>Skill 3</li>
+                        <li>Skill 4</li>
+                    </div>
+                    <div class="flex flex-col" style="width: 20%">
+                        <h4>Leadership</h4>
+                        <li>Skill 1</li>
+                        <li>Skill 2</li>
+                        <li>Skill 3</li>
+                        <li>Skill 4</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4 mb-8" id="my-experience">
+        <div class="mb-4">
+            <h2><strong>Experience</strong></h2>
+        </div>
+        <div class="flex flex-col mb-4">
+            <div class="container flex flex-row" style="justify-content: space-between;">
+                <h4><strong>Data Scientist</strong> @ Pepper</h4>
+                <h4>2/2023-Present</h4>
+            </div>
+            <div class="flex flex-col">
+                <p><i>Served as Senior and Lead Data Scientist at Pepper, an IoT Software company developing innovative solutions for SmartHome Devices.</i></p>
+                <li>Developed, maintained, and improved machine learning and signal processing models integrated into Notion's smart home sensors and Pepper’s IoT platform.</li>
+                <li>Using Snowflake and Looker I developed, designed, and managed our anlytics platform provide accurate and up to date information to business teams and external partners.</li>
+                <li>Designed and implemented a Blue/Green pipeline and CLI tool using AWS Lambda, streamlining partner reporting processes and enhancing efficiency.</li>
+                <li>Pitched and presented analytics capabilities and to prospective partners and clients, including the development of custom reports and prototyping solutions.</li>
+                <li>Leveraged CircleCI to design automated testing and deployment pipelines.</li>
+            </div>
+        </div>
+        <div class="flex flex-col mb-4">
+            <div class="container flex flex-row" style="justify-content: space-between;">
+                <h4><strong>Co-Founder</strong> @ Canvassed</h4>
+                <h4>6/2022-Present</h4>
+            </div>
+            <div class="flex flex-col">
+                <p><i>Co-founded Canvassed, an emerging startup venture that compiles, cleans, and aggregates Commercial Real Estate Listings data.</i></p>
+                <li>Led the creation of automated web scrapers for 400+ commercial real estate firms, improving data acquisition efficiency and accuracy.</li>
+                <li>Currently building a Flask-based website where users will be able to explore and purchase listings data on demand.</li>
+                <li>Built an efficient data pipeline using Python, AWS, and Azure that connects the aforementioned web scrapers to our database and website.</li>
+                <li>Developed natural language processing models to extract information from property descriptions.</li>
+            </div>
+        </div>
+        <div class="flex flex-col mb-4">
+            <div class="container flex flex-row" style="justify-content: space-between;">
+                <h4><strong>Data Solutions Engineer</strong> @ TSCG</h4>
+                <h4>5/2021-1/2023</h4>
+            </div>
+            <div class="flex flex-col">
+                <p><i>Worked as technical lead for the commercial real estate firm TSCG's Location Intelligence team.</i></p>
+                <li>Led a dispersed team of 20+ analysts and assistants, overseeing the development of innovative scripts, tools, and applications to streamline data processing and analysis.</li>
+                <li>Pitched and presented analytics capabilities to prospective clients, involving the design of pitch decks and presentations, proposal of solutions, and creation of prototypes.</li>
+                <li>Led the development of solutions, utilizing advanced statistical modeling techniques and machine learning algorithms (e.g., regression analysis, clustering), to tailor retail growth strategies for prominent retailers, restaurants, and landlords.</li>
+                <li>Built data pipelines for the extraction, transformation, and loading of spatial and non-spatial data including a national database of retailers, NYC Subway Ridership, and credit card transaction data.</li>
+                <li>Conducted training sessions for real estate brokers, equipping them with knowledge on new resources.</li>
+            </div>
+        </div>
+        <div class="flex flex-col mb-4">
+            <div class="container flex flex-row" style="justify-content: space-between;">
+                <h4><strong>Senior Location Data Analyst</strong> @ TSCG</h4>
+                <h4>5/2018-5/2021</h4>
+            </div>
+            <div class="flex flex-col">
+                <p><i>Lead Location Data Analyst in TSCG's New York City Office</i></p>
+                <li>Used ArcGIS, Excel, Python, and SQL to analyze data and create custom reports, graphics, and maps.</li>
+                <li>Built client-specific models for site selection, market entry, and void analysis.</li>
+                <li>Led the development of solutions, utilizing advanced statistical modeling techniques and machine learning algorithms (e.g., regression analysis, clustering), to tailor retail growth strategies for prominent retailers, restaurants, and landlords.</li>
+                <li>Developed, tested, and deployed interactive ArcGIS web apps to assist with real estate market research, strategy development and property management.</li>
+            </div>
+        </div>
+    </div>
+        <div class="container mt-4 mb-8" id="my-education">
+        <div class="mb-4">
+            <h2><strong>Education</strong></h2>
+        </div>
+        <div class="flex flex-col mb-4">
+            <div class="container flex flex-row" style="justify-content: space-between;">
+                <h4><strong>B.A. Geography, International Affairs</strong> @ The George Washington University</h4>
+            </div>
+            <div class="flex flex-col">
+                <p><i>Cum Laude</i></p>
+                <li>Minor in Geographic Information Systems</p>
+                <li>Concentration in International Environmental Studies</li>
+                <li>Co-Captain and Treasurer of GW Men's Rugby Club</li>
+                <li>Co-Host of Sidewalk Surfing WRGW Radio Program</li>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

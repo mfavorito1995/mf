@@ -1,13 +1,19 @@
 {% extends "_base_side.html" %}
 
 
+{% block statictop %}
+    <div class="mb-4">
+        <h1>Blog Gallery</h1>
+    </div>
+    <ul class="flex gap-5 md:mb-3 md:gap-8">
+            <li>Sort By</li>
+            <li>Random Blog</li>
+    </ul>
+{% endblock statictop %}
+
 {% block content %}
     <div>
-        <div class="mb-4" style="max-height: 10vh">
-            <h1>Blog Gallery</h1>
-        </div>
     {% if blogs_date_desc %}
-        <div class="overflow-y-auto" style="max-height: 80vh;">
             {% for b in blogs_date_desc %}
                 {% if forloop.counter0 == 0 %}
                     <div class="flex flex-wrap" style="justify-content: space-between;">
@@ -199,7 +205,6 @@
                 
             {% endif %}
 
-        </div>
         </div>
     {% else %}
         <p>Write something, will ya?!</p>

@@ -20,6 +20,10 @@
 
 <body class="h-screen bg-green-50">
     <div class="flex flex-col h-full mx-4">
+        <header>
+            {% block statictop %}
+            {% endblock statictop %}
+        </header>
         <div class=" mt-4 main-content flex-grow">
             <div id="sidebar" class="flex flex-row">
                 <div class = "flex-shrink-0 w-10vw">
@@ -28,31 +32,17 @@
                         F
                     </h2>
                 </div>
-
-                <div class="flex flex-col" style="width: 100%">
-                    <div class="flex-grow-1">
-                        <div class="mb-4" style="min-height: 10vh; max-height: 20vh;">
-                            {% block statictop %}
-                            {% endblock statictop %}
-                        </div>
-                    </div>
-                    <div class="flex-shrink-0 overflow-y-auto" style="max-height: 70vh;">
-                        {% block content %}
-                        {% endblock content %}
-                    </div>
+                <div class="flex-grow">
+                    {% block content %}
+                    {% endblock content %}
                 </div>
-
-                <div class= "flex flex-shrink-0 w-10vw">
-                    <div class="flex flex-col">
-                        {% block rightside %}
-                        {% endblock rightside %}
-                    </div>
+                <div class= "flex-shrink-0 w-10vw">
                 </div>
             </div>
         </div>
-        <footer class="flex-grow-1 h-10vh content-center">
+        <footer class="flex-shrink-0 h-10vh content-center">
             <ul class="flex gap-5 md:mb-3 md:gap-8 justify-center">
-                <li><a href="/about_me/">About</a></li>
+                <li>About</li>
                 <li><a href="/blog/">Blogs</a></li>
                 <li><a href="/contact/contact/">Contact</li>
                 <li>GitHub</li>

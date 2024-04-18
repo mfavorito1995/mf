@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'blog.apps.BlogConfig',
     'contact',
+    'about_me.apps.AboutMeConfig',
     'compressor',
+    'heroicons'
 ]
 
 MIDDLEWARE = [

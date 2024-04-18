@@ -2,7 +2,9 @@
 module.exports = {
   content: [
     './templates/**/*.html',
-    './homepage/templates/**/*.html'
+    './homepage/templates/**/*.html',
+    './blog/templates/**/*.html',
+    './about_me/templates/**/*.html'
   ],
   theme: {
     extend: {
