@@ -1,8 +1,10 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Contact
 
-class ContactForm(forms.Form):
+class ContactForm(ModelForm):
 
-    sender_email = forms.EmailField(widget=forms.TextInput(attrs={"placeholder": "E-mail"}))
-    subject = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Subject"}))
-    message = forms.CharField(widget=forms.Textarea(attrs={"placeholder": "Your message"}))
-    
+    class Meta:
+        model = Contact
+        fields = '__all__'
+        

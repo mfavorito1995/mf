@@ -40,10 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'homepage.apps.HomepageConfig',
     'blog.apps.BlogConfig',
-    'contact',
     'about_me.apps.AboutMeConfig',
     'compressor',
-    'heroicons'
+    'contact',
+    'heroicons',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -125,9 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
+STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-]
+)
 
 ### From geeks for geeks tailwind css/django tutorial
 COMPRESS_ROOT = BASE_DIR / 'static'
@@ -143,6 +144,9 @@ STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-DEFAULT_FROM_EMAIL = "mfavorito1995@gmail.com"
-NOTIFY_EMAIL = "mfavorito1995@gmail.com"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mfavorito1995@gmail.com'
+EMAIL_HOST_PASSWORD = 'Ready2Rock1995#'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
