@@ -130,6 +130,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+# The folder/path where blog files will be stored
+BLOG_FILE_URL = '/blog_content/'
+BLOG_FILE_ROOT = os.path.join(BASE_DIR, 'blog_content')
+
 ### From geeks for geeks tailwind css/django tutorial
 COMPRESS_ROOT = BASE_DIR / 'static'
  

@@ -25,6 +25,11 @@
                         <ul>
                             <li><a href="{% url 'blog:a_blog' b.id %}">{{ b.title }}</li>
                             <li><a href="/blog/{{ b.id }}/">{{ b.title }}</li>
+
+                            {% if b.gallery_image %}
+                                <img src = {{ b.gallery_image.url }} alt="Gallery Image" class="small-image">
+                            {% endif %}
+
                         </ul>
                     </div>
                 </div>
