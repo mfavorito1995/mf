@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'contact',
     'heroicons',
     'anymail',
+    'django_browser_reload',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'mf_site.urls'
@@ -126,13 +128,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    ]
 
 # The folder/path where blog files will be stored
 BLOG_FILE_URL = '/blog_content/'
-BLOG_FILE_ROOT = os.path.join(BASE_DIR, 'blog_content')
+BLOG_FILE_ROOT = BASE_DIR / 'blog_content'
 
 ### From geeks for geeks tailwind css/django tutorial
 COMPRESS_ROOT = BASE_DIR / 'static'

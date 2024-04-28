@@ -15,3 +15,7 @@ body {
 .card-wrapper {
     width: calc(100% / var(--n-row-cards));
 }
+
+.custom-height {
+    height: 0; /* Initially set height to 0 */
+}

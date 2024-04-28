@@ -17,7 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path("", include("homepage.urls")),
@@ -25,7 +24,9 @@ urlpatterns = [
     path("contact/", include("contact.urls")),
     path("blog/", include("blog.urls")),
     path('admin/', admin.site.urls),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 if settings.DEBUG:
+    from django.conf.urls.static import static
     urlpatterns += static(settings.BLOG_FILE_URL, document_root=settings.BLOG_FILE_ROOT)
