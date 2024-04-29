@@ -1,0 +1,6 @@
+/* Custom Bulma Theme */
+
+:root {
+    --bulma-body-background-color: hsl(120, 50%, 90%);
+    --bulma-body-color: #1b1b1b;
+}

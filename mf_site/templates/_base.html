@@ -1,29 +1,14 @@
-{% load compress %}
-{% load static %}
+{% extends "_head.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content=
-        "width=device-width, initial-scale=1.0">
-    <title>_Base</title>
-
-    {% compress css %}
-        <link rel="stylesheet" href="{% static 'src/output.css' %}">
-    {% endcompress %}
-    <link rel="stylesheet" href="{% static 'global.css' %}">
-
-</head>
-
-<body class="h-screen bg-green-50">
-    <div class="flex flex-col h-full mx-4">
-        <div class=" mt-4 main-content overflow-y-auto flex-grow">
+{% block body %}
+<body class="base-body">
+    <div class="main-container">
+        <div class="main-content">
             {% block content %}
             {% endblock content %}
         </div>
         {% include '_footer.html' %}
     </div>
 </body>
+{% endblock %}

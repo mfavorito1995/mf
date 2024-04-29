@@ -1,8 +1,14 @@
-<footer class="flex-shrink-0 h-10vh content-center">
-    <ul class="flex gap-5 md:mb-3 md:gap-8 justify-center">
-        <li><a href="/about_me/">About</a></li>
-        <li><a href="/blog/">Blogs</a></li>
-        <li><a href="/contact/">Contact</a></li>
-        <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/mfavorito1995">GitHub</a></li>
+{% load static %}
+
+{% block pagestyles %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% endblock %}
+
+<footer class="footer-container flex-shrink-0 h-10vh content-center">
+    <ul class="footer-list flex gap-5 md:mb-3 md:gap-8 justify-center">
+        <li><a class="footer-link" href="/about_me/">About</a></li>
+        <li><a class="footer-link" href="/blog/">Blogs</a></li>
+        <li><a class="footer-link" href="/contact/">Contact</a></li>
+        <li><a class="footer-link" target="_blank" rel="noopener noreferrer" href="https://github.com/mfavorito1995">GitHub</a></li>
     </ul>
 </footer>

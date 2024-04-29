@@ -7,8 +7,22 @@ html {
     line-height: inherit;
     min-height: 100vh;
     height: 100vh;
-    background-color: hsl(120, 50%, 90%);
 }
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem; 
+}
+
+.main-content {
+    margin-top: 1rem;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
 
 .w-full {
     width: 100%

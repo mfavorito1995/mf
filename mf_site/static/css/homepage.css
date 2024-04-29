@@ -1,0 +1,17 @@
+.homepage-container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+}
+
+.name-div {
+    margin-bottom: 1rem;
+}
+
+.name-text {
+    font-size: 8rem;
+    line-height: 1;
+}

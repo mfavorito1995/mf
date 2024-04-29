@@ -1,9 +1,15 @@
 {% extends "_base.html" %}
 
+{% load static %}
+
+{% block pagestyles %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock %}
+
 {% block content %}
-    <div class="flex flex-col h-full" style="justify-content: space-between">
-        <div id="name-div" class="mb-4">
-            <p class="text-9xl">Mark<br>Favorito</h1>
+    <div class="homepage-container" style="justify-content: space-between">
+        <div id="name-div" class="name-div">
+            <p class="name-text">Mark<br>Favorito</h1>
         </div>
         <div class="my-4 leading-loose">
             <h2 class="leading-normal" style="justify-content: flex-end">

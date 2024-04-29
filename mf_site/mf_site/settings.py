@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'blog.apps.BlogConfig',
     'about_me.apps.AboutMeConfig',
-    'compressor',
     'contact',
     'heroicons',
     'anymail',
