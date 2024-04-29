@@ -10,11 +10,19 @@
         "width=device-width, initial-scale=1.0">
     <title>_Base</title>
 
+    <style>
+        @font-face {
+            font-family: 'YourFontName';
+            src: url('{% static "fonts/JetBrainsMono-Medium.woff2" %}') format('woff2'),
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link rel="stylesheet" href="{% static 'css/theme.css' %}">
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
-    {% comment %} 
-    <link rel="stylesheet" href="{% static 'css/flex.css' %}"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/flex.css' %}">
     {% block pagestyles %}
     {% endblock %}
 

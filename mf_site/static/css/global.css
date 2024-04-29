@@ -1,3 +1,4 @@
+
 html {
     line-height: 1.5;
 }
@@ -38,4 +39,82 @@ html {
 
 .h-full {
     height: 100%
+}
+
+.horizontal-list {
+
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 0.75 rem;
+    justify-content: center;
+
+}
+
+.side-container {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.gutter {
+
+    display: flex;
+    flex-shrink: 0;
+    width: 10vw;
+
+}
+
+.middle {
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.statictop-container {
+
+    margin-bottom: 1rem;
+    min-height: 10vh;
+    max-height: 20vh;
+
+}
+
+.content-container {
+
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+    max-height: 70vh;
+
+}
+
+.hero-link {
+
+    color: var(--bulma-body-color);
+    font-weight: bold;
+    font-size: large;
+
+}
+
+h1 {
+    
+    font-size: 3rem;
+    font-weight:700;
+
+}
+
+h2 {
+    
+    font-size: xx-large;
+    font-weight:700;
+
+}
+
+h4 {
+
+    font-weight:700;
+
 }

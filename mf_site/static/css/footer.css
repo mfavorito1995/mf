@@ -6,15 +6,6 @@
     align-items: center;
 }
 
-.footer-list {
-
-    display: flex;
-    gap: 1.25rem;
-    margin-bottom: 0.75 rem;
-    justify-content: center;
-
-}
-
 .footer-link {
     color: var(--bulma-body-color);
     font-weight: bold;

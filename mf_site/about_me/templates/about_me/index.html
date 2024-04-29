@@ -1,24 +1,20 @@
 {% extends "_base_side.html" %}
 
-<style>
+{% load static %}
 
-.res-cont {
-    margin-top: 1rem;
-    margin-bottom: 3rem; 
-}
-
-</style>
-
+{% block pagestyles %}
+    <link rel="stylesheet" href="{% static 'css/about_me.css' %}">
+{% endblock %}
 
 {% block statictop %}
     <div class="mb-4">
         <h1>About Me</h1>
     </div>
-    <ul class="flex gap-5 md:mb-3 md:gap-8">
-            <li><a href="#my-summary">Summary</a></li>
-            <li><a href="#my-skills">Skills</a></li>
-            <li><a href="#my-experience">Experience</a></li>
-            <li><a href="#my-education">Education</a></li>
+    <ul class="horizontal-list">
+            <li><a class="hero-link" href="#my-summary">Summary</a></li>
+            <li><a class="hero-link" href="#my-skills">Skills</a></li>
+            <li><a class="hero-link" href="#my-experience">Experience</a></li>
+            <li><a class="hero-link" href="#my-education">Education</a></li>
     </ul>
 {% endblock statictop %}
 {% block content %}
@@ -36,71 +32,75 @@
             <h2><strong>Skills</strong></h2>
         </div>
         <div class="mb-4">
-            <div class="flex flex-col">
+            <div class="skills-row">
                 <h4><strong>Technical</strong></h4>
-                <div class="flex flex-row flex-grow">
-                    <div class="flex flex-col" style="width: 20%">
-                        <h4>Python</h4>
-                        <li>Pandas</li>
-                        <li>NumPy</li>
-                        <li>Scikit-Learn</li>
-                        <li>PyTorch</li>
-                        <li>Django (this website)</li>
-                        <li>Flask</li>
-                    </div>
-                    <div class="flex flex-col" style="width: 20%">
-                        <h4>Databases/Tools</h4>
-                        <li>Snowflake</li>
-                        <li>Azure</li>
-                        <li>SQLite</li>
-                        <li>MongoDB</li>
-                        <li>Looker</li>
-                        <li>AWS (S3, EC2, Lambda)</li>
-                    </div>
-                    <div class="flex flex-col" style="width: 20%">
-                        <h4>Geospatial</h4>
-                        <li>ArcGIS</li>
-                        <li>QGIS</li>
-                        <li>MapBox</li>
-                        <li>Spatial Analytics</li>
-                        <li>Geoprocessing Tools</li>
-                    </div>
-                    <div class="flex flex-col" style="width: 20%">
-                        <h4>Data Science</h4>
-                        <li>Basic JavaScript</li>
-                        <li>ETL Design/Dev</li>
-                        <li>Data Wrangling</li>
-                        <li>Webscraping</li>
-                        <li>Streamlit</li>
-                        <li>CI/CD</li>
+                <div class="fixed-grid has-4-cols">
+                    <div class="grid">
+                        <div class="cell">
+                            <h4>Python</h4>
+                            <li>Pandas</li>
+                            <li>NumPy</li>
+                            <li>Scikit-Learn</li>
+                            <li>PyTorch</li>
+                            <li>Django (this website)</li>
+                            <li>Flask</li>
+                        </div>
+                        <div class="cell">
+                            <h4>Databases/Tools</h4>
+                            <li>Snowflake</li>
+                            <li>Azure</li>
+                            <li>SQLite</li>
+                            <li>MongoDB</li>
+                            <li>Looker</li>
+                            <li>AWS (S3, EC2, Lambda)</li>
+                        </div>
+                        <div class="cell">
+                            <h4>Geospatial</h4>
+                            <li>ArcGIS</li>
+                            <li>QGIS</li>
+                            <li>MapBox</li>
+                            <li>Spatial Analytics</li>
+                            <li>Geoprocessing Tools</li>
+                        </div>
+                        <div class="cell">
+                            <h4>Data Science</h4>
+                            <li>Basic JavaScript</li>
+                            <li>ETL Design/Dev</li>
+                            <li>Data Wrangling</li>
+                            <li>Webscraping</li>
+                            <li>Streamlit</li>
+                            <li>CI/CD</li>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="mb-4">
-            <div class="flex flex-col">
+            <div class="skills-row">
                 <h4><strong>Interpersonal</strong></h4>
-                <div class="flex flex-row flex-grow">
-                    <div class="flex flex-col" style="width: 20%">
-                        <h4>Communcation</h4>
-                        <li>Skill 1</li>
-                        <li>Skill 2</li>
-                        <li>Skill 3</li>
-                        <li>Skill 4</li>
-                    </div>
-                    <div class="flex flex-col" style="width: 20%">
-                        <h4>Project Management</h4>
-                        <li>Trello</li>
-                        <li>Asana</li>
-                        <li>Skill 3</li>
-                        <li>Skill 4</li>
-                    </div>
-                    <div class="flex flex-col" style="width: 20%">
-                        <h4>Leadership</h4>
-                        <li>Skill 1</li>
-                        <li>Skill 2</li>
-                        <li>Skill 3</li>
-                        <li>Skill 4</li>
+                <div class="fixed-grid has-4-cols">
+                    <div class="grid">
+                        <div class="cell">
+                            <h4>Communcation</h4>
+                            <li>Skill 1</li>
+                            <li>Skill 2</li>
+                            <li>Skill 3</li>
+                            <li>Skill 4</li>
+                        </div>
+                        <div class="cell">
+                            <h4>Project Management</h4>
+                            <li>Trello</li>
+                            <li>Asana</li>
+                            <li>Skill 3</li>
+                            <li>Skill 4</li>
+                        </div>
+                        <div class="cell">
+                            <h4>Leadership</h4>
+                            <li>Skill 1</li>
+                            <li>Skill 2</li>
+                            <li>Skill 3</li>
+                            <li>Skill 4</li>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,8 +110,8 @@
         <div class="mb-4">
             <h2><strong>Experience</strong></h2>
         </div>
-        <div class="flex flex-col mb-4">
-            <div class="container flex flex-row" style="justify-content: space-between;">
+        <div class="experience-item">
+            <div class="experience-title">
                 <h4><strong>Data Scientist</strong> @ Pepper</h4>
                 <h4>2/2023-Present</h4>
             </div>
@@ -124,8 +124,8 @@
                 <li>Leveraged CircleCI to design automated testing and deployment pipelines.</li>
             </div>
         </div>
-        <div class="flex flex-col mb-4">
-            <div class="container flex flex-row" style="justify-content: space-between;">
+        <div class="experience-item">
+            <div class="experience-title">
                 <h4><strong>Co-Founder</strong> @ Canvassed</h4>
                 <h4>6/2022-Present</h4>
             </div>
@@ -137,12 +137,12 @@
                 <li>Developed natural language processing models to extract information from property descriptions.</li>
             </div>
         </div>
-        <div class="flex flex-col mb-4">
-            <div class="container flex flex-row" style="justify-content: space-between;">
+        <div class="experience-item">
+            <div class="experience-title">
                 <h4><strong>Data Solutions Engineer</strong> @ TSCG</h4>
                 <h4>5/2021-1/2023</h4>
             </div>
-            <div class="flex flex-col">
+            <div class="experience-details">
                 <p><i>Worked as technical lead for the commercial real estate firm TSCG's Location Intelligence team.</i></p>
                 <li>Led a dispersed team of 20+ analysts and assistants, overseeing the development of innovative scripts, tools, and applications to streamline data processing and analysis.</li>
                 <li>Pitched and presented analytics capabilities to prospective clients, involving the design of pitch decks and presentations, proposal of solutions, and creation of prototypes.</li>
@@ -151,12 +151,12 @@
                 <li>Conducted training sessions for real estate brokers, equipping them with knowledge on new resources.</li>
             </div>
         </div>
-        <div class="flex flex-col mb-4">
-            <div class="container flex flex-row" style="justify-content: space-between;">
+        <div class="experience-item">
+            <div class="experience-title">
                 <h4><strong>Senior Location Data Analyst</strong> @ TSCG</h4>
                 <h4>5/2018-5/2021</h4>
             </div>
-            <div class="flex flex-col">
+            <div class="experience-details">
                 <p><i>Lead Location Data Analyst in TSCG's New York City Office</i></p>
                 <li>Used ArcGIS, Excel, Python, and SQL to analyze data and create custom reports, graphics, and maps.</li>
                 <li>Built client-specific models for site selection, market entry, and void analysis.</li>
@@ -169,11 +169,11 @@
         <div class="mb-4">
             <h2><strong>Education</strong></h2>
         </div>
-        <div class="flex flex-col mb-4">
-            <div class="container flex flex-row" style="justify-content: space-between;">
+        <div class="experience-item">
+            <div class="experience-title">
                 <h4><strong>B.A. Geography, International Affairs</strong> @ The George Washington University</h4>
             </div>
-            <div class="flex flex-col">
+            <div class="experience-details">
                 <p><i>Cum Laude</i></p>
                 <li>Minor in Geographic Information Systems</p>
                 <li>Concentration in International Environmental Studies</li>

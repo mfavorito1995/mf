@@ -1,6 +1,9 @@
 /* Custom Bulma Theme */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=VT323&display=swap');
 
 :root {
-    --bulma-body-background-color: hsl(120, 50%, 90%);
-    --bulma-body-color: #1b1b1b;
+    --bulma-body-background-color: #152136;
+    --bulma-body-color: #aec3d6;
+    --bulma-text-strong: #8EA1BB;
+    --bulma-family-primary: "JetBrains Mono";
 }

@@ -2,31 +2,31 @@
 
 {% block body %}
 <body class="base-body">
-    <div class="flex flex-col h-full mx-4">
+    <div class="main-container">
         <div class="main-content">
-            <div id="sidebar" class="flex flex-row">
-                <div class = "flex-shrink-0 w-10vw">
+            <div id="sidebar" class="side-container">
+                <div class="gutter">
                     <h2>
                         M<br>
                         F
                     </h2>
                 </div>
 
-                <div class="flex flex-col" style="width: 100%">
-                    <div class="flex-grow-1">
-                        <div class="mb-4" style="min-height: 10vh; max-height: 20vh;">
+                <div class="middle">
+                    <div class="is-flex-grow-1">
+                        <div class="mb-4 statictop-container">
                             {% block statictop %}
                             {% endblock statictop %}
                         </div>
                     </div>
-                    <div class="flex-shrink-0 overflow-y-auto" style="max-height: 70vh;">
+                    <div class="content-container">
                         {% block content %}
                         {% endblock content %}
                     </div>
                 </div>
 
-                <div class= "flex flex-shrink-0 w-10vw">
-                    <div class="flex flex-col">
+                <div class="gutter">
+                    <div class="is-flex-direction-column">
                         {% block rightside %}
                         {% endblock rightside %}
                     </div>

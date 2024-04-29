@@ -1,0 +1,53 @@
+.res-cont {
+    margin-top: 1rem;
+    margin-bottom: 3rem; 
+}
+
+.skills-row {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.skills-col-container {
+
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+}
+
+.skills-column {
+
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+
+}
+
+.experience-item {
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+
+}
+
+.experience-title {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 1rem;
+    margin-bottom: 0.5rem;
+
+}
+
+.experience-details {
+
+    display: flex;
+    flex-direction: column;
+
+}
