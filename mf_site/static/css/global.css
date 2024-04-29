@@ -2,10 +2,12 @@ html {
     line-height: 1.5;
 }
 
-body {
+.base-body {
     margin: 0;
     line-height: inherit;
     min-height: 100vh;
+    height: 100vh;
+    background-color: hsl(120, 50%, 90%);
 }
 
 .w-full {
@@ -18,4 +20,8 @@ body {
 
 .custom-height {
     height: 0; /* Initially set height to 0 */
+}
+
+.h-full {
+    height: 100%
 }
