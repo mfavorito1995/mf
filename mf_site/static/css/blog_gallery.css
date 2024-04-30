@@ -1,0 +1,15 @@
+.gallery-cell {
+
+    height: 200px;
+    background-color: var(--bulma-text-strong);
+    color: var(--bulma-body-background-color);
+    border-radius: 1rem;
+    padding: 1rem;
+
+}
+
+.gallery-cell a {
+
+    color: var(---bulma-body-background-color);
+
+}
