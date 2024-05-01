@@ -5,6 +5,8 @@
     color: var(--bulma-body-background-color);
     border-radius: 1rem;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
 
 }
 
@@ -14,7 +16,7 @@
 
 }
 
-.gallery-cell div {
+.gallery-cell-top div {
 
     font-size: small;
     vertical-align: middle;
@@ -35,4 +37,20 @@
 .gallery-col {
     padding-bottom: 0.25rem;
 
+}
+
+.gallery-cell-top {
+    flex: 1;
+}
+
+.gallery-cell-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-cell-image {
+
+    width: 128px;
+    
 }

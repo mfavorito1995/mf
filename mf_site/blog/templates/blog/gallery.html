@@ -24,62 +24,65 @@
         <div class="grid is-col-min-10">
             {% for blog in blogs_date_desc %}
             <div class="cell gallery-cell" style="min-height: 400px">
-                <h4><a href="{% url 'blog:a_blog' blog.id %}">{{ blog.title }}</a></h4>
+                <div class="gallery-cell-top" style="flex: 1;">
+                    <h4><a href="{% url 'blog:a_blog' blog.id %}">{{ blog.title }}</a></h4>
 
-                {% if blog.place %}
-                <div class="columns is-1 is-mobile">
-                    <div class="column is-narrow gallery-col">
-                        {% heroicon_micro "globe-americas" %}
+                    {% if blog.place %}
+                    <div class="columns is-1 is-mobile">
+                        <div class="column is-narrow gallery-col">
+                            {% heroicon_micro "globe-americas" %}
+                        </div>
+                        <div class="column gallery-col">
+                            <p class="is-flex" style="align-items: center;">
+                                <span class="ml-2">{{blog.place}}</span>
+                            </p>
+                        </div>
                     </div>
-                    <div class="column gallery-col">
-                        <p class="is-flex" style="align-items: center;">
-                            <span class="ml-2">{{blog.place}}</span>
-                        </p>
+                    {% endif %}
+                    {% if blog.music %}
+                    <div class="columns is-1 is-mobile">
+                        <div class="column is-narrow gallery-col">
+                            {% heroicon_micro "musical-note" %}
+                        </div>
+                        <div class="column gallery-col">
+                            <p class="is-flex" style="align-items: center;">
+                                <span class="ml-2">{{blog.music}}</span>
+                            </p>
+                        </div>
                     </div>
+                    {% endif %}
+                    {% if blog.display_date %}
+                    <div class="columns is-1 is-mobile">
+                        <div class="column is-narrow gallery-col gallery-col">
+                            {% heroicon_micro "calendar-days" %}
+                        </div>
+                        <div class="column gallery-col">
+                            <p class="is-flex" style="align-items: center;">
+                                <span class="ml-2">{{blog.display_date}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if blog.category %}
+                    <div class="columns is-1 is-mobile">
+                        <div class="column is-narrow gallery-col">
+                            {% heroicon_micro "folder-open" %}
+                        </div>
+                        <div class="column gallery-col">
+                            <p class="is-flex" style="align-items: center;">
+                                <span class="ml-2">{{blog.category.all|join:", "}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
-                {% if blog.music %}
-                <div class="columns is-1 is-mobile">
-                    <div class="column is-narrow gallery-col">
-                        {% heroicon_micro "musical-note" %}
-                    </div>
-                    <div class="column gallery-col">
-                        <p class="is-flex" style="align-items: center;">
-                            <span class="ml-2">{{blog.music}}</span>
-                        </p>
-                    </div>
-                </div>
-                {% endif %}
-                {% if blog.display_date %}
-                <div class="columns is-1 is-mobile">
-                    <div class="column is-narrow gallery-col gallery-col">
-                        {% heroicon_micro "calendar-days" %}
-                    </div>
-                    <div class="column gallery-col">
-                        <p class="is-flex" style="align-items: center;">
-                            <span class="ml-2">{{blog.display_date}}</span>
-                        </p>
-                    </div>
-                </div>
-                {% endif %}
-                {% if blog.category %}
-                <div class="columns is-1 is-mobile">
-                    <div class="column is-narrow gallery-col">
-                        {% heroicon_micro "folder-open" %}
-                    </div>
-                    <div class="column gallery-col">
-                        <p class="is-flex" style="align-items: center;">
-                            <span class="ml-2">{{blog.category.all|join:", "}}</span>
-                        </p>
-                    </div>
-                </div>
-                {% endif %}
-
+                <div class="gallery-cell-bottom" style="flex: 1">
                 {% if blog.gallery_image %}
-                <figure class="image is-128x128">
-                    <img src = {{ blog.gallery_image.url }}/>
-                </figure>
-                {% endif %}
+                    <figure class="image gallery-cell-image">
+                        <img src = {{ blog.gallery_image.url }}/>
+                    </figure>
+                    {% endif %}
+                </div>
             </div>
             {% endfor %}
         </div>
