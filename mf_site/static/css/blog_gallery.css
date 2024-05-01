@@ -13,3 +13,26 @@
     color: var(---bulma-body-background-color);
 
 }
+
+.gallery-cell div {
+
+    font-size: small;
+    vertical-align: middle;
+}
+
+.gallery-cell h4 {
+
+    margin-bottom: 1rem;
+
+}
+
+.gallery-cell.columns {
+
+    margin-bottom: 1rem;
+
+}
+
+.gallery-col {
+    padding-bottom: 0.25rem;
+
+}
