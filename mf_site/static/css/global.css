@@ -41,14 +41,27 @@ html {
     height: 100%
 }
 
-.horizontal-list {
-
+.horizontal-list-center {
     display: flex;
     gap: 1.25rem;
-    margin-bottom: 0.75 rem;
+    margin-bottom: 0.75rem;
     justify-content: center;
-
 }
+
+.horizontal-list-start {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 0.75rem;
+    justify-content: flex-start;
+}
+
+.horizontal-list-end {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 0.75rem;
+    justify-content: flex-end;
+}
+
 
 .side-container {
 
@@ -62,6 +75,7 @@ html {
     display: flex;
     flex-shrink: 0;
     width: 10vw;
+    margin-left: 1rem;
 
 }
 
@@ -110,6 +124,13 @@ h2 {
     
     font-size: xx-large;
     font-weight:700;
+
+}
+
+h3 {
+    
+    font-size: large;
+    font-weight:800;
 
 }
 

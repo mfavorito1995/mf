@@ -26,6 +26,15 @@
 
 }
 
+.skills-column-title {
+
+    font-weight: var(--bulma-strong-weight);
+    color: var(--bulma-strong-color);
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+
+}
+
 .experience-item {
 
     display: flex;
