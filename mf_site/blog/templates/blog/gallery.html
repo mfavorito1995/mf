@@ -5,6 +5,7 @@
 
 {% block pagestyles %}
     <link rel="stylesheet" href="{% static 'css/blog_gallery.css' %}">
+    <script type=module src="{% static 'js/blog/_gallery.js' %}"></script>
 {% endblock %}
 
 
@@ -14,14 +15,15 @@
     </div>
     <ul class="horizontal-list-start">
             <li>Sort By</li>
-            <li>Random Blog</li>
+            <li><a href="{% url 'blog:random' %}">Random Blog</a></li>
+            <li><a href="{% url 'blog:a_blog' random_blog %}">Random Blog</a></li>
     </ul>
 {% endblock statictop %}
 
 {% block content %}
     <div>
     {% if blogs_date_desc %}
-        <div class="grid is-col-min-10 mr-4">
+        <div class="grid is-col-min-10 mr-4" id="cell-container">
             {% for blog in blogs_date_desc %}
             <div class="cell gallery-cell" style="min-height: 400px">
                 <div class="gallery-cell-top" style="flex: 1;">
