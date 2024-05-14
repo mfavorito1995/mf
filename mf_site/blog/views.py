@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.conf import settings
+from django.core.serializers import serialize
+
 
 from .models import Blog
 
@@ -67,4 +69,26 @@ def random(request):
 
 def get_most_recent(request):
     blogs_date_desc = Blog.objects.order_by("publish_date")
-    return JsonResponse(list(Sblogs_date_desc))
+    blog_list = [
+        {
+            'id': b.id,
+            'name': str(b.title),
+            'display_date': str(b.display_date),
+            'place': str(b.place),
+            'music': str(b.music),
+            'category': ", ".join(sorted([x.name for x in b.category.all()])),
+            'galley_image': str(b.gallery_image),
+        }
+        for b in blogs_date_desc
+    ]
+
+    return JsonResponse(blog_list, safe=False)
+    
+    # what information do I need?
+    # blog id
+    # place
+    # music
+    # display_date
+    # category
+    # gallery_image
+

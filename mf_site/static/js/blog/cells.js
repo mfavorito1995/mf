@@ -38,21 +38,44 @@ export class Gallery {
     }
 
     clearAll() {
+        console.log(this.element)
+        console.log('???')
         this.element.innerHTML = '';
     }
 
     async originalOrder() {
         try {
-            const response = await fetch('blog/get_most_recent');
-            const posts = await response.json();
-            console.log(posts);
-            // Now you can continue with your logic here
+            const response = await fetch('/blog/get_most_recent');
+            console.log('Response received:', response);
+        
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const jR = await response.json();
+            return jR;        
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
 
-    reset() {
+    async reset() {
         this.clearAll();
+
+        const posts = await this.originalOrder();
+        
+        if (posts) {
+            posts.forEach(post => {
+                console.log(post);
+                // Here you can create and append the elements to this.element
+                // For example:
+                let postElement = document.createElement('div');
+                postElement.textContent = post.name; // or other fields
+                this.element.appendChild(postElement);
+            });
+        } else {
+            console.error('No posts to display');
+        }
+
     }
 }

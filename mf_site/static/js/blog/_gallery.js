@@ -7,6 +7,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
     var cellContainer = document.getElementById('cell-container');
     var GalleryObj = new Gallery(cellContainer);
 
+    var clearBtn = document.getElementById('clear-btn')
+    clearBtn.addEventListener('click', function () {
+      GalleryObj.clearAll();
+    })
+
+    var resetBtn = document.getElementById('reset-btn')
+    resetBtn.addEventListener('click', function () {
+      GalleryObj.reset();
+    })
+
   });
 
-// CURRENT SITUATION - script loading in HTML, but request/fetch not working - progress!

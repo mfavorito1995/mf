@@ -16,6 +16,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
+    def __repr__(self):
+        return self.__str__()
+    
 class Music(models.Model):
     id = models.AutoField(primary_key=True)
     song=models.CharField(max_length=255)
@@ -31,6 +34,9 @@ class Music(models.Model):
     
     def __str__(self):
         return self.full_name
+    
+    def __repr__(self):
+        return self.__str__()
 
 class Place(models.Model):
     id = models.AutoField(primary_key=True)
@@ -54,6 +60,9 @@ class Place(models.Model):
             return f"{self.full_name}, {self.place_lat}, {self.place_long}"
         else:
             return self.full_name
+    
+    def __repr__(self):
+        return self.__str__()
 
 
 def blog_content_file_path(instance, filename):
@@ -136,7 +145,7 @@ class Blog(models.Model):
     @property
     def display_date(self):
         if not self.date_when:
-            return self.publish_date.date
+            return self.publish_date.date()
         return self.date_when
 
     @property
