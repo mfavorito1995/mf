@@ -72,7 +72,7 @@ def get_most_recent(request):
     blog_list = [
         {
             'id': b.id,
-            'name': str(b.title),
+            'title': str(b.title),
             'display_date': str(b.display_date),
             'place': str(b.place),
             'music': str(b.music),

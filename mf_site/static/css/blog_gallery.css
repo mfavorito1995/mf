@@ -10,6 +10,11 @@
 
 }
 
+.gallery-cell-top {
+    z-index: 1;
+    position: relative; /* Set position to use z-index */
+}
+
 .gallery-cell a {
 
     color: var(---bulma-body-background-color);
