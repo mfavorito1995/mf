@@ -59,3 +59,25 @@
     width: 128px;
     
 }
+
+/* Styles for the active state
+.sort-btn.active {
+    background-color: green;
+    color: white;
+    border: 1px solid green;
+} */
+
+/* Arrow pointing down for active state */
+.sort-btn.active::after {
+    content: '\25BC'; /* Unicode for down arrow */
+    display: inline-block;
+    margin-left: 5px; /* Adjust this for horizontal positioning */
+    transform: translateX(5px) translateY(-1px); /* Adjust vertical and horizontal positioning */
+}
+
+.sort-btn.reverse::after {
+    content: '\25B2'; /* Unicode for up arrow */
+    display: inline-block;
+    margin-left: 5px; /* Adjust this for horizontal positioning */
+    transform: translateX(5px) translateY(-1px); /* Adjust vertical and horizontal positioning */
+}

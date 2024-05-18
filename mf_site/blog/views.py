@@ -67,8 +67,9 @@ def random(request):
     #     # Handle case where no blogs exist
     return redirect('blog:index')
 
-def get_most_recent(request):
-    blogs_date_desc = Blog.objects.order_by("publish_date")
+def get_date_desc(request):
+    raw_list = Blog.objects.order_by("publish_date")
+
     blog_list = [
         {
             'id': b.id,
@@ -79,16 +80,63 @@ def get_most_recent(request):
             'category': ", ".join(sorted([x.name for x in b.category.all()])),
             'galley_image': str(b.gallery_image),
         }
-        for b in blogs_date_desc
+        for b in raw_list
     ]
 
     return JsonResponse(blog_list, safe=False)
-    
-    # what information do I need?
-    # blog id
-    # place
-    # music
-    # display_date
-    # category
-    # gallery_image
 
+
+def get_date_asc(request):
+    raw_list = Blog.objects.order_by("-publish_date")
+
+    blog_list = [
+        {
+            'id': b.id,
+            'title': str(b.title),
+            'display_date': str(b.display_date),
+            'place': str(b.place),
+            'music': str(b.music),
+            'category': ", ".join(sorted([x.name for x in b.category.all()])),
+            'galley_image': str(b.gallery_image),
+        }
+        for b in raw_list
+    ]
+
+    return JsonResponse(blog_list, safe=False)    
+
+def get_title_desc(request):
+    raw_list = Blog.objects.order_by("title")
+
+    blog_list = [
+        {
+            'id': b.id,
+            'title': str(b.title),
+            'display_date': str(b.display_date),
+            'place': str(b.place),
+            'music': str(b.music),
+            'category': ", ".join(sorted([x.name for x in b.category.all()])),
+            'galley_image': str(b.gallery_image),
+        }
+        for b in raw_list
+    ]
+
+    return JsonResponse(blog_list, safe=False)    
+
+
+def get_title_asc(request):
+    raw_list = Blog.objects.order_by("-title")
+
+    blog_list = [
+        {
+            'id': b.id,
+            'title': str(b.title),
+            'display_date': str(b.display_date),
+            'place': str(b.place),
+            'music': str(b.music),
+            'category': ", ".join(sorted([x.name for x in b.category.all()])),
+            'galley_image': str(b.gallery_image),
+        }
+        for b in raw_list
+    ]
+
+    return JsonResponse(blog_list, safe=False)    

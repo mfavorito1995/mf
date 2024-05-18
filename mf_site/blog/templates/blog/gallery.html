@@ -15,11 +15,14 @@
     </div>
     <ul class="horizontal-list-start">
             <li>Sort By</li>
-            <li><a href="{% url 'blog:random' %}">Random Blog</a></li>
-            <li><a href="{% url 'blog:a_blog' random_blog %}">Random Blog</a></li>
-            <button id="reset-btn">RESET</button>
-            <button id="clear-btn">CLEAR</button>
+            <button class="sort-btn active" id="date-btn">Date</button>
+            <button class="sort-btn" id="title-btn">Title</button>
+
     </ul>
+    <ul class="horizontal-list-start">
+        <li><a href="{% url 'blog:random' %}">Random Blog</a></li>
+        <li><a href="{% url 'blog:a_blog' random_blog %}">Random Blog</a></li>
+</ul>
 {% endblock statictop %}
 
 {% block content %}
