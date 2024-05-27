@@ -3,11 +3,15 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.conf import settings
 from django.core.serializers import serialize
 
+import json
 
-from .models import Blog
+from .models import Blog, Category
 
 def index(request):
     blogs_date_desc = Blog.objects.order_by("publish_date")
+
+    # Get the categories - we use this in the filters...
+    categories = json.dumps(list(Category.objects.values_list('name', flat=True).distinct()))
 
     # Calculate the number of extra cards needed to fill the last row
     n_row_cards = 4  # You can adjust this value as needed
@@ -27,6 +31,7 @@ def index(request):
         "n_row_cards": n_row_cards,
         "card_width": f"1/{n_row_cards}",
         "random_blog": random_blog.id,
+        "categories": categories,
     }
 
     return render(request, "blog/gallery.html", context)
@@ -67,8 +72,28 @@ def random(request):
     #     # Handle case where no blogs exist
     return redirect('blog:index')
 
-def get_date_desc(request):
-    raw_list = Blog.objects.order_by("publish_date")
+
+def order_by_string_generator(params):
+
+    field_string = params.get('field')
+
+    if params.get('direction') == 'asc':
+        field_string = "-" + field_string
+
+    return field_string
+
+
+def get_field_direction(request):
+
+    # Get needed info from request based on params in url query string
+    params = {
+        'field': request.GET.get('field'),
+        'direction': request.GET.get('direction'),
+    }
+
+    field_string = order_by_string_generator(params)
+    print(field_string)
+    raw_list = Blog.objects.order_by(field_string)
 
     blog_list = [
         {
@@ -83,60 +108,12 @@ def get_date_desc(request):
         for b in raw_list
     ]
 
-    return JsonResponse(blog_list, safe=False)
+    return JsonResponse(blog_list, safe=False)  
 
+def get_filtered_blogs(request):
 
-def get_date_asc(request):
-    raw_list = Blog.objects.order_by("-publish_date")
+    # This method will take whatever params are created by the FilterCollection and return filtered blogs
+    # default behavior should be identical to initial blog loader
+    # Check out that view and see if we should just copy or expand.
 
-    blog_list = [
-        {
-            'id': b.id,
-            'title': str(b.title),
-            'display_date': str(b.display_date),
-            'place': str(b.place),
-            'music': str(b.music),
-            'category': ", ".join(sorted([x.name for x in b.category.all()])),
-            'galley_image': str(b.gallery_image),
-        }
-        for b in raw_list
-    ]
-
-    return JsonResponse(blog_list, safe=False)    
-
-def get_title_desc(request):
-    raw_list = Blog.objects.order_by("title")
-
-    blog_list = [
-        {
-            'id': b.id,
-            'title': str(b.title),
-            'display_date': str(b.display_date),
-            'place': str(b.place),
-            'music': str(b.music),
-            'category': ", ".join(sorted([x.name for x in b.category.all()])),
-            'galley_image': str(b.gallery_image),
-        }
-        for b in raw_list
-    ]
-
-    return JsonResponse(blog_list, safe=False)    
-
-
-def get_title_asc(request):
-    raw_list = Blog.objects.order_by("-title")
-
-    blog_list = [
-        {
-            'id': b.id,
-            'title': str(b.title),
-            'display_date': str(b.display_date),
-            'place': str(b.place),
-            'music': str(b.music),
-            'category': ", ".join(sorted([x.name for x in b.category.all()])),
-            'galley_image': str(b.gallery_image),
-        }
-        for b in raw_list
-    ]
-
-    return JsonResponse(blog_list, safe=False)    
+    return None

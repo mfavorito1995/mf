@@ -214,6 +214,16 @@ export class PostObject {
 // cells.js
 export class Gallery {
 
+    /**
+     * 
+     * Class used to represent and handle the entire Gallery page
+     * Includes methods to clear all posts and create posts
+     * 
+     * Controlled by Sorters and SorterHolder.
+     * 
+     * @param {*} element The HTML element where the Gallery lives
+     */
+
     constructor(element) {
         this.element = element;
         this.originalOrder();
@@ -234,13 +244,19 @@ export class Gallery {
     }
 
     clearAll() {
-        console.log('???')
         this.element.innerHTML = '';
     }
 
     async originalOrder() {
+
+        /**
+         * 
+         * Hardcoded request for original order - publish_date, desc
+         * 
+         */
+
         try {
-            const response = await fetch('/blog/get_date_desc');
+            const response = await fetch('/blog/get_field_direction?field=publish_date&direction=desc');
             console.log('Response received:', response.body);
         
             if (!response.ok) {
@@ -253,102 +269,37 @@ export class Gallery {
             console.error('Error fetching data:', error);
         }
     }
-
-    async dateAsc() {
-
-        console.log('dateasc')
-        try {
-            const response = await fetch('/blog/get_date_asc');
-            console.log('Response received:', response.body);
-        
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const jR = await response.json();
-            return jR;        
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-
-    async titleDesc() {
-        try {
-            const response = await fetch('/blog/get_title_desc');
-            console.log('Response received:', response.body);
-        
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const jR = await response.json();
-            return jR;        
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-
-    async titleAsc() {
-        try {
-            const response = await fetch('/blog/get_title_asc');
-            console.log('Response received:', response.body);
-        
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const jR = await response.json();
-            return jR;        
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-
+    
     async reset() {
+
+        /**
+         * 
+         * Reset the page back to originalOrder
+         * 
+         */
+
         this.clearAll();
 
         const posts = await this.originalOrder();
         
         if (posts) {
-            posts.forEach(post => {
-
-                var postObj = new PostObject(post)
-                var postElement = postObj.createCard()
-                this.element.appendChild(postElement);
-
-            });
+            this.createCards(posts);
         } else {
             console.error('No posts to display');
         }
 
     }
 
-    async order(field) {
+    reorder(posts) {
+
+        /**
+         * 
+         * Using posts from Sorter, reorders posts on the Gallery page
+         * 
+         */
+
         this.clearAll();
-
-        if (field == 'date') {
-            var posts = await this.dateDesc();
-            this.createCards(posts)
-        }
-        if (field == 'title') {
-            var posts = await this.titleDesc();
-            this.createCards(posts)
-        }
-
-    }
-
-    async reverse(field) {
-        this.clearAll();
-
-        if (field == 'date') {
-            var posts = await this.dateAsc();
-        }
-        if (field == 'title') {
-            var posts = await this.titleAsc();
-        }
-
-        this.createCards(posts)
-
+        this.createCards(posts);
     }
     
 }

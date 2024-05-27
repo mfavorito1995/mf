@@ -6,6 +6,9 @@
 {% block pagestyles %}
     <link rel="stylesheet" href="{% static 'css/blog_gallery.css' %}">
     <script type=module src="{% static 'js/blog/_gallery.js' %}"></script>
+    <script>
+        var categories = JSON.parse ("{{categories | escapejs}}");
+    </script>
 {% endblock %}
 
 
@@ -19,6 +22,20 @@
             <button class="sort-btn" id="title-btn">Title</button>
 
     </ul>
+
+    <ul class="horizontal-list-start">
+        <li>Filter By</li>
+        <button class="filter-btn" id="date-filter-btn">Date</button>
+        <button class="filter-btn" id="category-filter-btn">Category</button>
+
+    </ul>
+
+    <div id="filter-option-section">
+
+        <!-- filters will be created here in JS -->
+
+    </div>
+
     <ul class="horizontal-list-start">
         <li><a href="{% url 'blog:random' %}">Random Blog</a></li>
         <li><a href="{% url 'blog:a_blog' random_blog %}">Random Blog</a></li>
