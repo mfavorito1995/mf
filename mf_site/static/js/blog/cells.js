@@ -4,40 +4,6 @@
  * 
  */
 
-/*
-
-UPDATE EOD 5/16 - plan below in action, some of card is being added correctly but not all.
-
-New plan for cell organization
-- when page loads create JS objects for each card
-    - do we try to read it from the HTML or do we collect from DB
-    - I think collect from db. But leave HTML on page to start for fast loading
-- the elements will persist
-- elements will include all attributes of the blog that can be used for sorting
-- elements will include a copy of the complete html element - jquery clone or otherwise
-
-Cell gallery object
-- Load by default using python but this object handles what happens next
-- params:
-    - cell container obj: the element where all cells live
-- should the filters/sort buttons be their own objects?
-    - generic galleryControl
-        - takes field and action?
-
-- methods:
-    - sort by
-        - takes a field/thing to sort by
-    - filter by
-        - takes field and value
-    - - Sort and filter by should work together
-
-    - reset
-        - send back to python version
-
-    - create cell
-    - create all cells
-
-*/
 
 const heroicons = {
     globeAmericas: `
@@ -224,12 +190,39 @@ export class Gallery {
      * @param {*} element The HTML element where the Gallery lives
      */
 
-    constructor(element) {
+    constructor(element, sorterHolderObj, filterHolderObj) {
         this.element = element;
+        this.sorterHolderObj = sorterHolderObj;
+        this.filterHolderObj = filterHolderObj
         this.originalOrder();
+
+        this.setup();
+
+    }
+
+    setup() {
+
+        /**
+         * 
+         * Set up the sorterHolder, activeHolder, and filterHolder so those objects can access the Gallery
+         * 
+         */
+
+        this.sorterHolderObj.setGalleryObj(this);
+        this.sorterHolderObj.activeHolder.sortDecisionmaker();
+        this.filterHolderObj.setGalleryObj(this);
+
     }
 
     createCards (posts) {
+
+        /**
+         * 
+         * Method that creates the gallery post cards
+         * 
+         * @param {*} posts - JSON representation of posts from DB - comes from blog/views.get_field_direction()
+         */
+
         if (posts) {
             posts.forEach(post => {
 
@@ -244,6 +237,14 @@ export class Gallery {
     }
 
     clearAll() {
+
+        /**
+         * 
+         * Simple method to clear all information from Gallery
+         * Used just before adding new cards
+         * 
+         */
+
         this.element.innerHTML = '';
     }
 
@@ -290,6 +291,21 @@ export class Gallery {
 
     }
 
+    async resetCurrentSort() {
+
+        /**
+         * 
+         * Reset the order to the currently active sort - maintaining direction!
+         * 
+         * Used when unselecting a filter
+         * 
+         */
+
+        this.sorterHolderObj.resetCurrentSort();
+
+
+    }
+
     reorder(posts) {
 
         /**
@@ -300,6 +316,119 @@ export class Gallery {
 
         this.clearAll();
         this.createCards(posts);
+    }
+
+    setSorterHolder(sorterHolderObj) {
+
+        this.sorterHolderObj = sorterHolderObj;
+
+    }
+
+    constructBlogUrl() {
+
+        return `/blog/get_field_direction?field=${this.sortField}&direction=${this.sortDirection}&filter_params=${this.filterString}`
+
+    }
+
+    async fetchPosts() {
+        
+        var searchUrl = this.constructBlogUrl();
+        console.log(searchUrl)
+
+        try {
+            const response = await fetch(searchUrl);
+            console.log('Response received:', response.body);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const jR = await response.json();
+            return jR;        
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+    }
+
+    createQueryString() {
+
+        /**
+         * 
+         * Method that combines the FilterHolder.filterParams into a queryString
+         * If no values in there, it returns {}
+         * 
+         * Called within this.update() to set this.filterString
+         * 
+         */
+
+        var queryString = '{'
+        const entries = Object.entries(this.filterHolderObj.filterParams);
+        entries.forEach(([field, values]) => {
+
+            values.forEach((value) => {
+
+                queryString+=`"${field}":"${value}",`
+
+            })
+
+        })
+
+        queryString+='}'
+
+        return queryString
+
+    }
+
+    getSortField() {
+
+        /**
+         * 
+         * Simple method to retrieve the activeField from SorterHolder
+         * 
+         * Called within this.update() to set this.sortField
+         * 
+         */
+
+        return this.sorterHolderObj.activeField;
+
+    }
+
+    getSortDirection() {
+
+        /**
+         * 
+         * Simple method to retrieve the activeDir from SorterHolder
+         * 
+         * Called within this.update() to set this.sortDirection
+         * 
+         */
+
+        return this.sorterHolderObj.activeDir;
+
+    }
+
+    async update() {
+
+        /**
+         * 
+         * Function that is called to "update" the gallery when a new filter or sort is added
+         * It takes all data from sorterHolder and FilterHolder to create the desired query and order
+         * 
+         */
+
+        // Make sure all params are up to date
+        this.sortField = this.getSortField();
+        this.sortDirection = this.getSortDirection();
+        this.filterString = this.createQueryString();
+
+        // collect the posts from the DB
+        var posts = await this.fetchPosts()
+
+        // Remove current posts
+        this.clearAll();
+
+        // Display newly returned posts
+        this.reorder(posts)
+
     }
     
 }

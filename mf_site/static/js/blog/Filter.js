@@ -1,63 +1,3 @@
-/**
- * 
- * STATUS EOD 5/26
- * 
- * Filter button UI working - display on and off on clicks
- * Have yet to actually filter anything
- * But we have the category data
- * 
- * Next step is to actually filter by a category B - )
- * 
- * 
- */
-
-
-export class FilterCollection {
-
-    /**
-     * class to hold all the filters
-     * 
-     * Should be ablet to take an unknown number of options
-     * Should be able to add/remove filters as needed
-     * 
-     * key methods
-     *      - add Filters? Filters also need to be able to add a collection...
-     *      - combined filter
-     *          - collect all filters
-     *      - remove all filters
-     *          - remove one handled by the Filter, but this triggers the combined filter
-     * 
-     * @param  {...any} filters 
-     * 
-     */
-
-    // class to hold all the filters
-    // this should be able to take an uniknown number of filters
-    // It should also be able to add and possibly remove filters as needed?
-    // Key methods
-
-    constructor(optionSectionElement, ...filters) {
-
-        this.filters = filters // is this the right way to add an uncertain amount of filters
-        this.optionSectionElement = optionSectionElement;
-
-        this.setup();
-
-    }
-
-    setup() {
-
-        this.filters.forEach((filter) => {
-
-            console.log(filter);
-            filter.setFilterCollection(this)
-
-        });
-
-    }
-
-}
-
 export class Filter {
 
     /**
@@ -75,38 +15,48 @@ export class Filter {
      * 
      * v1 is only one filter at a time
      * v2 is multiple filters
-     * 
-     * Open Questions
-     *      - Where do the actions take place/do we need to provide a section to put the action in?
-     *          - vision is that the action elements go under the filter options
-     *          - each filter should have a section to place its option elements in
-     *          - we can create these in HTML and hide OR create dynamically when filter is selected?
-     *              - if dynamic we will need to provide the location - perhaps an empty section - where all go
-     *                  - so HTML has a "filter option section" and we add the dynamically created "filter option element" to it when filter activated
-     *                  - the options or other elements go in there
+     *
      * 
      */
 
-    constructor(buttonElement, field) {
+    constructor(buttonElement, filterText, field) {
 
         this.buttonElement = buttonElement;
+        this.filterText = filterText;
         this.field = field;
-        this.status = 'inactive'
+        this.status = 'inactive';
+        this.activeFilterVals = [];
         
     }
 
-    setFilterCollection(filterCollectionObj) {
+    setFilterHolder(filterHolderObj) {
 
-        this.filterCollectionObj = filterCollectionObj;
+        /**
+         * 
+         * Simple method to set the FilterHolder obj.
+         * Called by FilterHolder when that object is created - ...filter is a param of FilterHolder
+         * 
+         */
+
+        this.filterHolderObj = filterHolderObj;
 
     }
 
     handleClick() {
 
+        /**
+         * 
+         * Critical function that handles selection/unselection of a filter
+         * If the filter is not active, this activates it
+         *      1. displays the filter options
+         *      2. sets status to active
+         * 
+         */
+
         if ( this.status === 'inactive' ) {
 
             this.createFilter();
-            this.filterCollectionObj.optionSectionElement.style.display = 'block';
+            this.filterHolderObj.optionSectionElement.style.display = 'block';
             this.status = 'active';
 
         }
@@ -116,8 +66,9 @@ export class Filter {
             this.hideFilter();
             this.status = 'inactive';
 
-
         }
+
+        this.buttonElement.classList = `filter-btn ${this.status}`;
 
         // if inactive
 
@@ -145,6 +96,35 @@ export class Filter {
 
     }
 
+    addFilter(value) {
+
+        /**
+         * 
+         * Critical method that passes a value from the clicked option to this and then to the filterHolder
+         * Called when an option is clicked and "inactive"
+         * 
+         */
+
+        console.log('addFilter', value)
+        this.activeFilterVals.push(value)
+        this.filterHolderObj.addFilterParam(this.field, value)
+
+    }
+
+    removeFilter(value) {
+
+        /**
+         * 
+         * Critical method that removes the value from the clicked option from this and the filterHolder
+         * Called when an option is clicked and "active"
+         * 
+         */
+
+        console.log('removeFilter', value)
+        this.activeFilterVals = this.activeFilterVals.filter(x => x !== value);
+        this.filterHolderObj.removeFilterParam(this.field, value)
+
+    }
 
 }
 
@@ -156,12 +136,13 @@ export class ValueFilter extends Filter {
     /**
      * 
      * @param {*} buttonElement 
+     * @param {*} filterText
      * @param {*} field 
      * @param {*} optionsArray 
      */
 
-    constructor(buttonElement, field, optionsArray) {
-        super(buttonElement, field);
+    constructor(buttonElement, filterText, field, optionsArray) {
+        super(buttonElement, filterText, field);
         this.optionsArray = optionsArray;
         this.optionObjects = [];
 
@@ -170,7 +151,6 @@ export class ValueFilter extends Filter {
 
     setup() {
 
-        console.log(this.optionsArray)
         this.buttonElement.addEventListener('click', (event) => this.handleClick(event));
 
 
@@ -180,7 +160,7 @@ export class ValueFilter extends Filter {
             var optionElement = this.createOption(option)
 
             // Create the option object - create the event listener in the constructor/setup
-            var optionObj = new DropdownOption(optionElement, this);
+            var optionObj = new DropdownOption(option, optionElement, this);
             this.optionObjects.push(optionObj);
 
         });
@@ -196,7 +176,8 @@ export class ValueFilter extends Filter {
     
             // Create the "header" so the user knows what this is
             var heraderLi = document.createElement('li')
-            heraderLi.textContent = this.field;
+            heraderLi.textContent = this.filterText;
+            console.log(this.filterText)
             filterSection.appendChild(heraderLi);
     
             this.optionObjects.forEach((oe) => {
@@ -205,7 +186,7 @@ export class ValueFilter extends Filter {
     
             })
     
-            this.filterCollectionObj.optionSectionElement.appendChild(filterSection);
+            this.filterHolderObj.optionSectionElement.appendChild(filterSection);
             
             this.filterSection = filterSection;
 
@@ -229,7 +210,16 @@ export class ValueFilter extends Filter {
         }
 
     }
+
     createOption(option) {
+
+        /**
+         * 
+         * Method called on instantiation that creates the option element
+         * Not displayed unless the Filter element has been clicked and is active
+         * Until then, the parent element (belonging to the Filter) is hidden
+         * 
+         */
 
         // create html element
         var btnElement = document.createElement('button');
@@ -240,12 +230,25 @@ export class ValueFilter extends Filter {
 
     }
 
+
 }
 
 class DropdownOption {
 
-    constructor(optionElement, filterObj) {
+    /**
+     * 
+     * Object that represents an "option" for a value filter
+     * Any of these objects can be selected adn posts are filtered if they match this.value and this.filterObj.field
+     * 
+     * Example - this.value = "Admin" and this.filterObj.field = "category" - when clicked, posts with "Admin" category are displayed.
+     * 
+     * @param {*} option 
+     * @param {*} optionElement 
+     * @param {*} filterObj 
+     */
 
+    constructor(option, optionElement, filterObj) {
+        this.value = option;
         this.element = optionElement;
         this.filterObj = filterObj;
         this.status = 'inactive';
@@ -260,35 +263,58 @@ class DropdownOption {
 
     }
 
-    handleClick() {
+    addFilterToFilter() {
 
-        // If inactive
-
-
-            // request blogs within the category
-            
-            // return the blogs within the category
-
-            // clear other blogs
-
-            // add returned blogs
-
-            // Add "active" to the classlist
-
-        // if active
-
-            // request all blogs
-
-            // return all blogs
-
-            // clear other blogs
-
-            // add returned blogs
-
-            // replace active with inactive
+        /**
+         * 
+         * Pass the value to filter function
+         * 
+         */
+        console.log('addFilterToFilter', this.value)
+        this.filterObj.addFilter(this.value);
 
     }
 
-    // 
+    removeFilterFromFilter() {
+
+        /**
+         * 
+         * Remove the value from filter function
+         * 
+         */
+        console.log('removeFilterFromFilter', this.value)
+        this.filterObj.removeFilter(this.value);
+
+    }
+
+    async handleClick() {
+
+        /**
+         * 
+         * Function that handles click events on the option
+         * If status is inactive, set to active and add the filter
+         * If status is acive, set to inactive and remove the filter
+         * 
+         * These filter values are passed up the chain to the FilterHolder and finally Gallery
+         * 
+         */
+
+        console.log("CLICK")
+
+        if ( this.status === 'inactive' ) {
+            
+            this.addFilterToFilter();
+            this.status = 'active';
+    
+        } else if ( this.status === 'active') {
+            
+            this.removeFilterFromFilter();
+            this.status = 'inactive';
+
+        }
+
+        this.element.classList = `filter-btn ${this.status}`;
+
+    }
 
 }

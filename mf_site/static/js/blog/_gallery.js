@@ -1,24 +1,27 @@
-// NOTES EOD 5_17
-// Set up the method to remove active/reverse from all other buttons if another button clicked
-// Need to make it so only one active at a time
-
-// SortHolder class
-  // sorters attribute is an array or dict style object with Sorter objects
-  // each sorter has same functions but with field as parameter
-    // sort, reverse, etc all by field
-    // They also have a property style bool to indicate if selected - perhaps its not bool, maybe it's just the "state"
-  // Has method to check if any Sorter is not "inactive"
-    // Does this need to know which Sorter is not "inactive"
-
-  // When any Sorter is clicked, SorterHolder checks if any others are active or reversed
-    // If so, set to "inactive", carry on with new click (or can the setting to incative happen after/concurrently)
+/**
+ *  NOTES 1:55 PM 5_28
+ *  Gallery, holder, sorter reqrite almost complete!
+ *    Everything moves through the gallery and its functions
+ * 
+ *  Remaining work
+ *    ADD DOCSTRINGS FOR FUNCTIONS!
+ *    Add post type to blogs
+ *    Figure out how to keep images after sorting
+ *      !!! - currently no images will appera because we call a sort upon gallery creation. 
+ *    Add a reset/clear filters button
+ *    Add a rest/clear sorts button
+ *    Stylin'   
+ * 
+ *  */
+// Re
 
 // 
 
 import { Gallery }  from './cells.js';
 import { Sorter } from './Sorter.js';
 import { SorterHolder } from './SorterHolder.js';
-import { Filter, FilterCollection, ValueFilter } from './Filter.js';
+import { Filter, ValueFilter } from './Filter.js';
+import { FilterHolder } from './FilterHolder.js';
 
 document.addEventListener("DOMContentLoaded", (event) => {
 
@@ -29,9 +32,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 
     console.log('we are here')
-    
-    var cellContainer = document.getElementById('cell-container');
-    var GalleryObj = new Gallery(cellContainer);
 
     var dateBtn = document.getElementById('date-btn')
     var titleBtn = document.getElementById('title-btn')  
@@ -43,18 +43,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // SorterHolder takes an array (may change) of Sorters and an index that is the default
     // Eventually we will load and sort on the default.
-    var SorterHolderObj = new SorterHolder(GalleryObj, [DateSorter, TitleSorter], 0)
+    var SorterHolderObj = new SorterHolder([DateSorter, TitleSorter], 0)
 
-    // Create Date Filter
-    var dateFilterBtn = document.getElementById("date-filter-btn");
+    // Create Post Type Filter
+    var postTypeFilterBtn = document.getElementById("postType-filter-btn");
+    var postTypeFilter = new ValueFilter(postTypeFilterBtn, 'Post Type', 'post_type', categories) // categories loaded in html from view
     
     // Create Category Filter
     var categoryFilterBtn = document.getElementById("category-filter-btn");
-    var categoryFilter = new ValueFilter(categoryFilterBtn, 'category', categories) // categories loaded in html from view
+    var categoryFilter = new ValueFilter(categoryFilterBtn, 'Category', 'category', categories) // categories loaded in html from view
 
     // Create the FilterCollection - add the previously created Filters
     var filterOptionSection = document.getElementById("filter-option-section");
-    var filterCollection = new FilterCollection(filterOptionSection, categoryFilter, categoryFilter)
+    var FilterHolderObj = new FilterHolder(filterOptionSection, categoryFilter, postTypeFilter)
+
+    
+    var cellContainer = document.getElementById('cell-container');
+    var GalleryObj = new Gallery(cellContainer, SorterHolderObj, FilterHolderObj);
 
   });
 

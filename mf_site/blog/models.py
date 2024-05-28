@@ -8,7 +8,6 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.conf import settings
 
-
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -18,7 +17,18 @@ class Category(models.Model):
     
     def __repr__(self):
         return self.__str__()
+
+class PostType(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
     
+    def __repr__(self):
+        return self.__str__()
+    
+
 class Music(models.Model):
     id = models.AutoField(primary_key=True)
     song=models.CharField(max_length=255)
@@ -37,6 +47,7 @@ class Music(models.Model):
     
     def __repr__(self):
         return self.__str__()
+
 
 class Place(models.Model):
     id = models.AutoField(primary_key=True)
@@ -82,6 +93,7 @@ class Blog(models.Model):
     publish_date = models.DateTimeField(auto_now_add=True)
     content_file = models.FileField(upload_to=blog_content_file_path, null=True, blank=True)
     gallery_image = models.FileField(upload_to=blog_gallery_image_path, null=True, blank=True)
+    post_type = models.ManyToManyField(PostType)
     category = models.ManyToManyField(Category)
     music = models.ForeignKey(Music, on_delete=models.CASCADE, related_name='blogs', null=True, blank=True)
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='blogs', null=True, blank=True)

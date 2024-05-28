@@ -62,6 +62,16 @@ html {
     justify-content: flex-end;
 }
 
+.horizontal-list-center button,
+.horizontal-list-start button,
+.horizontal-list-end button {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: 0.25rem;
+    
+}
 
 .side-container {
 
@@ -91,7 +101,7 @@ html {
 
     margin-bottom: 1rem;
     min-height: 10vh;
-    max-height: 20vh;
+    max-height: 30vh;
 
 }
 

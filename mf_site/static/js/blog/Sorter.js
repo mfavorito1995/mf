@@ -47,6 +47,7 @@ export class Sorter {
 
         // initialize the click events
         this.buttonElement.addEventListener('click', this.sortDecisionmaker.bind(this))
+        this.buttonElement.classList = `sort-btn ${this.status}`;
 
     }
 
@@ -78,23 +79,32 @@ export class Sorter {
 
         /**
          * 
-         * Method that directs the sorting based on sttaus and defaultDir or reverseDir
+         * Method called on click event that directs the sorting in the SorterHolder through SorterHolder.updateSort(this)
+         * The field and direction from this are accessed by SorterHolder
+         * Then, the Gallery.update() function sorts and filters.
          * 
          */
 
         if (this.status == 'inactive') {
 
             this.sort(this.defaultDir)
+            this.activeDir = this.defaultDir;
             this.status = 'active'
+            this.sorterHolderObj.updateSort(this)
+
 
         } else if (this.status == 'active') {
 
             this.sort(this.reverseDir)
+            this.activeDir = this.reverseDir;
             this.status = 'reverse'
+            this.sorterHolderObj.updateSort(this)
+
 
         } else if (this.status == 'reverse') {
 
             this.status = 'inactive';
+            this.activeDir = null
             this.sorterHolderObj.defaultSort(); // reset to the default
 
         } else {
@@ -103,29 +113,6 @@ export class Sorter {
 
         }
 
-    }
-
-    async sortRequest(direction) {
-
-        /**
-         * 
-         * Method to request posts from database
-         * Uses the instance's field and provided direction from sort and SortDecisionMaker
-         * 
-         */
-
-        console.log(`/blog/get_field_direction?field=${this.field}&direction=${direction}`)
-        try {
-            const response = await fetch(`/blog/get_field_direction?field=${this.field}&direction=${direction}`);
-            console.log('Response received:', response.body);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const jR = await response.json();
-            return jR;        
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
     }
 
     async sort(direction) {
@@ -171,10 +158,6 @@ export class Sorter {
 
         }
 
-        var posts = await this.sortRequest(direction);
-
-        // use the sorter holder -> gallery obj to create the cards.
-        this.sorterHolderObj.galleryObj.reorder(posts);
         this.sorterHolderObj.activeHolder = this
         this.buttonElement.classList = `sort-btn ${this.status}`;
 
@@ -211,8 +194,7 @@ export class Sorter {
         } else {
             this.status='reverse';
         }
-        console.log('DESCENDING', this.field);
-        console.log(this.status)
+
 
     }
 

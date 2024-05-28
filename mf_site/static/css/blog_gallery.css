@@ -3,7 +3,7 @@
     height: 200px;
     background-color: var(--bulma-text-strong);
     color: var(--bulma-body-background-color);
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -80,4 +80,12 @@
     display: inline-block;
     margin-left: 5px; /* Adjust this for horizontal positioning */
     transform: translateX(5px) translateY(-1px); /* Adjust vertical and horizontal positioning */
+}
+
+/* Highlight for active state */
+.filter-btn.active {
+
+    background-color: var(--bulma-text-strong);
+    color: var(--bulma-body-background-color);
+
 }

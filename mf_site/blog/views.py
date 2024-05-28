@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404, JsonResponse
 from django.conf import settings
 from django.core.serializers import serialize
+from django.db.models import Q
 
 import json
 
-from .models import Blog, Category
+from .models import Blog, Category, PostType
 
 def index(request):
     blogs_date_desc = Blog.objects.order_by("publish_date")
@@ -75,12 +76,32 @@ def random(request):
 
 def order_by_string_generator(params):
 
-    field_string = params.get('field')
+    print('field string???')
+
+    if params.get('field'):
+        field_string = params.get('field')
+    else:
+        field_string = 'publish_date'
 
     if params.get('direction') == 'asc':
         field_string = "-" + field_string
 
     return field_string
+
+
+def filter_value_generator(field: str, value: str):
+
+    if field == 'category':
+        # Look up id absed on value
+        category = Category.objects.filter(name=value).first()
+
+        return "category__id", category
+
+    if field == 'post_type':
+        # Look up id absed on value
+        post_type = PostType.objects.filter(name=value).first()
+
+        return "post_type__id", post_type
 
 
 def get_field_direction(request):
@@ -89,11 +110,31 @@ def get_field_direction(request):
     params = {
         'field': request.GET.get('field'),
         'direction': request.GET.get('direction'),
+        'filter_params': request.GET.get('filter_params'),
     }
 
+
     field_string = order_by_string_generator(params)
-    print(field_string)
-    raw_list = Blog.objects.order_by(field_string)
+
+    if params.get('filter_params'):
+        # conver the str data into a dict? Can this be done more easily??? JS object?
+        print('!!!', params.get('filter_params'))
+        filter_params = eval(params.get('filter_params'))
+
+        # Create the Q Query object
+        query = Q()
+        #Iterate over the provided filter dict - are these single value url params?
+        for field, value in filter_params.items():
+            if value:
+                print(field, value)
+
+                filterField, filterValue = filter_value_generator(field, value)
+
+                query &= Q(**{field:filterValue}) # *= is just like += but for lists???
+                print(query)
+        raw_list = Blog.objects.filter(query).order_by(field_string)
+    else:
+        raw_list = Blog.objects.order_by(field_string)
 
     blog_list = [
         {
@@ -109,11 +150,3 @@ def get_field_direction(request):
     ]
 
     return JsonResponse(blog_list, safe=False)  
-
-def get_filtered_blogs(request):
-
-    # This method will take whatever params are created by the FilterCollection and return filtered blogs
-    # default behavior should be identical to initial blog loader
-    # Check out that view and see if we should just copy or expand.
-
-    return None

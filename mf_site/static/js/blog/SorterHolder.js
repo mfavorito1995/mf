@@ -12,9 +12,8 @@ export class SorterHolder {
      * @param {*} defaultDir 
      */
 
-    constructor(galleryObj, holdersArray, defaultIndex=0, defaultDir="desc") {
+    constructor(holdersArray, defaultIndex=0, defaultDir="desc") {
 
-        this.galleryObj=galleryObj;
         this.holders=holdersArray;
         this.defaultDir=defaultDir;
         this.defaultIndex=defaultIndex
@@ -25,6 +24,7 @@ export class SorterHolder {
     }
 
     setup() {
+
 
         // Set this as the sorterHolderObj for each Holder
         this.holders.forEach( holder => {
@@ -45,10 +45,40 @@ export class SorterHolder {
 
     }
 
-    defaultSort() {
-        // Function to back to default sorter and default direction
-        this.defaultHolder.sort(this.defaultHolder.defaultDir)
+    setGalleryObj(galleryObj) {
+
+        this.galleryObj = galleryObj
 
     }
+
+    resetCurrentSort() {
+
+        this.activeHolder.sort();
+
+    }
+
+    updateSort(sorterObj) {
+
+        this.activeField = sorterObj.field;
+        this.activeDir = sorterObj.activeDir
+
+        console.log("Update sort", this.activeField, this.activeDir)
+
+        this.galleryObj.update();
+
+    }
+
+    defaultSort() {
+
+        this.activeField = this.defaultHolder.field;
+        this.activeDir = this.defaultDir;
+
+        console.log("Reset sort", this.activeField, this.activeDir)
+
+        this.galleryObj.update();
+
+    }
+
+
 
 }
