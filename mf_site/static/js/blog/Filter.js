@@ -68,6 +68,7 @@ export class Filter {
 
         }
 
+        this.filterHolderObj.update();
         this.buttonElement.classList = `filter-btn ${this.status}`;
 
         // if inactive
@@ -88,11 +89,9 @@ export class Filter {
 
     createFilter() {
 
-
     }
 
     hideFilter() {
-
 
     }
 
@@ -123,6 +122,15 @@ export class Filter {
         console.log('removeFilter', value)
         this.activeFilterVals = this.activeFilterVals.filter(x => x !== value);
         this.filterHolderObj.removeFilterParam(this.field, value)
+
+    }
+
+    deactivate() {
+
+        this.hideFilter();
+        this.activeFilterVals = [];
+        this.status = 'inactive';
+        this.buttonElement.classList = `filter-btn ${this.status}`;
 
     }
 
@@ -169,6 +177,8 @@ export class ValueFilter extends Filter {
 
     createFilter() {
 
+        super.createFilter();
+
         if ( this.filterSection === undefined ) {
 
             var filterSection = document.createElement('ul')
@@ -203,6 +213,8 @@ export class ValueFilter extends Filter {
 
     hideFilter() {
 
+        super.hideFilter();
+
         if ( this.filterSection !== undefined ) {
 
             this.filterSection.style.display = 'none';
@@ -227,6 +239,17 @@ export class ValueFilter extends Filter {
         btnElement.textContent = option;
 
         return btnElement;
+
+    }
+
+    deactivate() {
+
+        super.deactivate();
+        this.optionObjects.forEach((o) => {
+
+            o.deactivate();
+            
+        })
 
     }
 
@@ -313,6 +336,13 @@ class DropdownOption {
 
         }
 
+        this.element.classList = `filter-btn ${this.status}`;
+
+    }
+
+    deactivate() {
+
+        this.status = 'inactive';
         this.element.classList = `filter-btn ${this.status}`;
 
     }

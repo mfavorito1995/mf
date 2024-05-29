@@ -13,9 +13,10 @@ export class FilterHolder {
      */
 
 
-    constructor(optionSectionElement, ...filters) {
+    constructor(optionSectionElement, clearFilterButtonElement, ...filters) {
 
         this.optionSectionElement = optionSectionElement;
+        this.clearFilterButtonElement = clearFilterButtonElement;
 
         this.filters = filters // is this the right way to add an uncertain amount of filters
         this.filterParams = {};
@@ -24,7 +25,14 @@ export class FilterHolder {
 
     }
 
+
     setup() {
+
+        // Initialize the button visibility
+        this.updateButtonVisibility();
+
+        // Set up click event on clear button
+        this.clearFilterButtonElement.addEventListener('click', () => this.clearAll());
 
         // Iterate over filters and set this as the filterHolder
         this.filters.forEach((filter) => {
@@ -32,8 +40,43 @@ export class FilterHolder {
             filter.setFilterHolder(this)
 
         });
+        
 
     }
+
+    anyFilterActive() {
+
+        /**
+         * 
+         * Function to check if any filter has status 'active'
+         * 
+         */
+
+        return this.filters.some(filter => filter.status === 'active');
+    }
+
+    updateButtonVisibility() {
+
+        /**
+         * 
+         * Function used to update button visibility
+         * 
+         */
+
+        if (this.anyFilterActive()) {
+            this.clearFilterButtonElement.style.display = 'block';
+        } else {
+            this.clearFilterButtonElement.style.display = 'none';
+        }
+    }
+
+    // Function to check if an object is empty - we will use this on filterparams
+    isEmpty(obj) {
+
+        return Object.keys(obj).length === 0;
+
+    }
+
 
     setGalleryObj(galleryObj) {
 
@@ -45,6 +88,20 @@ export class FilterHolder {
          */
 
         this.galleryObj = galleryObj
+
+    }
+
+
+    update() {
+
+        /**
+         * 
+         * Function used to trigger updates for clear button and gallery posts
+         * 
+         */
+
+        this.updateButtonVisibility();
+        this.galleryObj.update();
 
     }
 
@@ -73,7 +130,7 @@ export class FilterHolder {
 
         }
 
-        this.galleryObj.update();
+        this.update();
 
     }
 
@@ -96,11 +153,40 @@ export class FilterHolder {
 
             this.filterParams[field] = this.filterParams[field].filter(x => x !== value);
 
-        } else {
+            // if that removal causes there to be no more selected options for that filter, delete the property
+            if (this.filterParams[field].length === 0) {
+                console.log("delete?")
+                delete this.filterParams[field];
+            }
 
         }
 
-        this.galleryObj.update()
+        this.update();
+
+    }
+
+    deactivatefilters() {
+
+        this.filters.forEach((f) => {
+
+            f.deactivate();
+
+        })
+
+    }
+
+    clearAll() {
+
+        /**
+         * 
+         * This is the reset function - triggered by clear button click
+         * Removes all filters and resets filterParams
+         * 
+         */
+
+        this.deactivatefilters();
+        this.filterParams = {};
+        this.update();
 
     }
 

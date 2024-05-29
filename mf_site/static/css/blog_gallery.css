@@ -89,3 +89,15 @@
     color: var(--bulma-body-background-color);
 
 }
+
+.clear-btn.inactive {
+
+    display: none
+
+}
+
+.clear-btn active {
+
+    display: flex
+
+}

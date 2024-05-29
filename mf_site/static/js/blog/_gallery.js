@@ -3,12 +3,14 @@
  *  Gallery, holder, sorter reqrite almost complete!
  *    Everything moves through the gallery and its functions
  * 
+ *  Completed work
+ *    Reset/clear filters button - 5/29
+ * 
  *  Remaining work
  *    ADD DOCSTRINGS FOR FUNCTIONS!
  *    Add post type to blogs
  *    Figure out how to keep images after sorting
- *      !!! - currently no images will appera because we call a sort upon gallery creation. 
- *    Add a reset/clear filters button
+ *      !!! - currently no images will appear because we call a sort upon gallery creation. 
  *    Add a rest/clear sorts button
  *    Stylin'   
  * 
@@ -55,7 +57,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // Create the FilterCollection - add the previously created Filters
     var filterOptionSection = document.getElementById("filter-option-section");
-    var FilterHolderObj = new FilterHolder(filterOptionSection, categoryFilter, postTypeFilter)
+    var clearFilterBtn = document.getElementById("clear-filter-btn");
+    var FilterHolderObj = new FilterHolder(filterOptionSection, clearFilterBtn, categoryFilter, postTypeFilter)
 
     
     var cellContainer = document.getElementById('cell-container');
